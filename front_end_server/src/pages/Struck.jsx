@@ -16,13 +16,46 @@ export function Select() {
                             <div className="howto">
                                 <div className="First-step">
                                     <div className="titel"><a>1.Prepare your Json</a></div>
-                                    <div></div>
+                                    <div className="code-box">
+                                        <pre>
+                                            <code>
+                                                {`{
+    id: your id,
+    vehicle  : name,
+    username : username,
+    password : password,
+}`
+                                                }
+                                            </code>
+                                        </pre>
+                                    </div>
+                                    <div>
+
+                                    </div>
+                                </div>
+                                <div className="Second-step">
+                                   <div className="titel-sd"><a>2.sent to Api</a></div>
+                                    <div className="code-boxt">
+                                        <pre>
+                                            <code>
+                                                {`{
+    https://127.0.0.1/3000/login
+}`
+                                                }
+                                            </code>
+                                        </pre>
+                                    </div> 
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
-                <div className="main-r"></div>
+                <div className="main-r">
+                    <div className="box-r">
+
+                    </div>
+                </div>
             </div>
         </div>
     )

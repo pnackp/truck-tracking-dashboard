@@ -33,6 +33,9 @@
     width: 70%;
     height: 100%;
     background-color: #e6e6e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .box-sel{
@@ -42,7 +45,7 @@
     flex-direction: column;
     width: 80%;
     height: 95%;
-    gap: 5px;
+    gap: 10px;
 }
 
 .title_box{
@@ -60,10 +63,10 @@
 
 .detail-box{
     width: 100%;
-    height: auto;
+    height: 15%;
     display: flex;
     justify-content: left;
-    align-items: center;
+    align-items: start;
     text-align: left;
     color: #334155;
     font-family: 'Roboto', sans-serif;
@@ -75,14 +78,16 @@
     height: 70%;
     width: 100%;
     display: flex;
+    flex-direction: column;
+    gap:20px;   
 }
 
 .First-step{
     width: 100%;
-    height: 65%;
+    height: auto;
 }
 
-.titel{
+.titel , .titel-sd{
     width: 100%;
     height: 15%;
     display: flex;
@@ -93,5 +98,41 @@
     color: #334155;
     font-family: 'Roboto', sans-serif;
     font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.Code{
+    height: 85%;
+    width: 100%;
+    border: 1px solid #334155;
+}
+
+.box-r{
+    height: 80%;
+    width:90%;
+    background-color: #dddddd;
+    border-radius: 28px;
+    border-left: 1px solid #dfdfdf;
+}
+
+.code-box{
+    display: flex ;
+    justify-content: start;
+    align-items: center;
+    height: auto;
+    color: #334155 ;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.code-boxt{
+    display: flex ;
+    justify-content: start;
+    align-items: center;
+    height: auto;   
+    color: #334155 ;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
     font-weight: 700;
 }

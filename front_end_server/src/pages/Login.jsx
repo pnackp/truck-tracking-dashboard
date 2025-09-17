@@ -14,7 +14,7 @@ export function Login() {
                 body: JSON.stringify({ username: user, password: pass })
             });
             const data = await response.json();
-            if (data.token) {
+            if (data.status) {
                 document.getElementsByClassName("container-lg")[0].style.display = "none";
                 localStorage.setItem("token", data.token);
             }
