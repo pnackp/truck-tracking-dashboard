@@ -63,7 +63,7 @@ async fn main() {
     let cors_layer = CorsLayer::new().allow_origin(Any).allow_methods([Method::GET , Method::POST])
         .allow_headers([header::CONTENT_TYPE, header::AUTHORIZATION]);
     let app = Router::new().route("/login",post(checkup))
-        .route("/test", get(test))
+        .route("/", get(test))
         .layer(cors_layer);
         
 

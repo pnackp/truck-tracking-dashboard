@@ -1,0 +1,14 @@
+C:\Users\pnack\Documents\server\back_end_server\target\debug\deps\serde-7549da0cd2a577a6.d: C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\lib.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\integer128.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\mod.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\de.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\ser.rs C:\Users\pnack\Documents\server\back_end_server\target\debug\build\serde-68f2aaf053c2a5e4\out/private.rs
+
+C:\Users\pnack\Documents\server\back_end_server\target\debug\deps\libserde-7549da0cd2a577a6.rlib: C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\lib.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\integer128.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\mod.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\de.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\ser.rs C:\Users\pnack\Documents\server\back_end_server\target\debug\build\serde-68f2aaf053c2a5e4\out/private.rs
+
+C:\Users\pnack\Documents\server\back_end_server\target\debug\deps\libserde-7549da0cd2a577a6.rmeta: C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\lib.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\integer128.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\mod.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\de.rs C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\ser.rs C:\Users\pnack\Documents\server\back_end_server\target\debug\build\serde-68f2aaf053c2a5e4\out/private.rs
+
+C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\lib.rs:
+C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\integer128.rs:
+C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\mod.rs:
+C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\de.rs:
+C:\Users\pnack\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\serde-1.0.225\src\private\ser.rs:
+C:\Users\pnack\Documents\server\back_end_server\target\debug\build\serde-68f2aaf053c2a5e4\out/private.rs:
+
+# env-dep:OUT_DIR=C:\\Users\\pnack\\Documents\\server\\back_end_server\\target\\debug\\build\\serde-68f2aaf053c2a5e4\\out

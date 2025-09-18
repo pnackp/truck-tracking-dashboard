@@ -1,59 +1,40 @@
 import "./Struck.css"
-import { useState } from "react"
 export function Select() {
     return (
         <div className="container_t">
-            <div className="main_t">
-                <div className="main-l">
-                    <div className="box-l">
-                        <div className="box-sel">
-                            <div className="title_box">
-                                <h1>Hi!! nack</h1>
-                            </div>
-                            <div className="detail-box">
-                                <a>You can easily add widgets by sending a JSON payload to our API.</a>
-                            </div>
-                            <div className="howto">
-                                <div className="First-step">
-                                    <div className="titel"><a>1.Prepare your Json</a></div>
-                                    <div className="code-box">
-                                        <pre>
-                                            <code>
-                                                {`{
-    id: your id,
-    vehicle  : name,
-    username : username,
-    password : password,
-}`
-                                                }
-                                            </code>
-                                        </pre>
-                                    </div>
-                                    <div>
-
-                                    </div>
-                                </div>
-                                <div className="Second-step">
-                                   <div className="titel-sd"><a>2.sent to Api</a></div>
-                                    <div className="code-boxt">
-                                        <pre>
-                                            <code>
-                                                {`{
-    https://127.0.0.1/3000/login
-}`
-                                                }
-                                            </code>
-                                        </pre>
-                                    </div> 
-                                </div>
-                            </div>
-
-                        </div>
+            <div className="box-t">
+                <div className="t-bar">
+                    <div className="t-title"><h1>Dash</h1></div>
+                    <div className="Logout">
+                        <button>Logout</button>
                     </div>
                 </div>
-                <div className="main-r">
-                    <div className="box-r">
+                <div className="box-m">
+                    <div className="box-m-l">
+                        <div className="box-t-m">
+                            <div className="box-t1">
+                                <a>Select your vehicle</a>
+                            </div>
+                        </div>
+                        <div className="box-b-l">
+                            <div className="box-in">
 
+                            </div>
+                        </div>
+                    </div>
+                    <div className="box-r">
+                        <div className="main-r">
+                            <div className="box-t-m-r">
+                                <div className="box-t2">
+                                    <a>Statistics</a>
+                                </div>
+                            </div>
+                            <div className ="Data">
+                                <div className = "bd">
+                                    
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,138 +1,148 @@
-.container_t {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-}
-
-.main_t {
-    display: flex;
+.container_t{
     width: 100%;
     height: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.main-l{
-    width: 30%;
+.box-t{
+    width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+}
+
+.t-bar{
+    width: 100%;
+    height: 15%;
+    display: flex;
+}
+
+.t-title{
+    height: 100%;
+    width: 15%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e6e6e6;
+    text-align: center;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgb(72, 78, 78); 
 }
 
-.box-l{
-    width: 80%;
-    height: 80%;
-    border-radius: 28px;
-    background-color: #FFFFFF;
+.Logout{
+    display:flex;
+    height: 100%;
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+}
+
+.Logout button{
+    height: 50%;
+    width: 50%;
+    border: 1px solid #8d8d8d;
+    background-color: aliceblue;
+    border-radius: 38px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: rgb(72, 78, 78); 
+}
+
+.box-m{
+    width: 100%;
+    height: 85%;
+    display: flex;
+}
+
+.box-m-l{
+    height: 100%;
+    width: 70%;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+}
+
+.box-t-m{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgb(72, 78, 78);
+}
+
+.box-t1{
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box-b-l{
+    height: 90%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-in{
+    width: 90%;
+    height: 90%;
+    border: 1px solid #c6c6c6;
+    border-radius: 16px;
+}
+
+.box-r{
+    width: 30%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .main-r{
-    width: 70%;
+    width: 100%;
     height: 100%;
-    background-color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.box-sel{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 80%;
-    height: 95%;
-    gap: 10px;
-}
-
-.title_box{
-    width: 100%;
-    height: 15%;
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    text-align: left;
-    color: #334155;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.detail-box{
-    width: 100%;
-    height: 15%;
-    display: flex;
-    justify-content: left;
-    align-items: start;
-    text-align: left;
-    color: #334155;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.howto{
-    height: 70%;
-    width: 100%;
     display: flex;
     flex-direction: column;
-    gap:20px;   
+    justify-content: center;
 }
 
-.First-step{
+.box-t-m-r{
     width: 100%;
-    height: auto;
-}
-
-.titel , .titel-sd{
-    width: 100%;
-    height: 15%;
+    height: 10%;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
     text-align: center;
-
-    color: #334155;
     font-family: 'Roboto', sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
+    color: rgb(72, 78, 78);
 }
 
-.Code{
-    height: 85%;
+.Data{
+    height: 90%;
     width: 100%;
-    border: 1px solid #334155;
-}
-
-.box-r{
-    height: 80%;
-    width:90%;
-    background-color: #dddddd;
-    border-radius: 28px;
-    border-left: 1px solid #dfdfdf;
-}
-
-.code-box{
-    display: flex ;
-    justify-content: start;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    height: auto;
-    color: #334155 ;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
 }
 
-.code-boxt{
-    display: flex ;
-    justify-content: start;
-    align-items: center;
-    height: auto;   
-    color: #334155 ;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
+.bd{
+    width: 60%;
+    height: 90%;
+    border: 1px solid #c6c6c6;
+    border-radius: 16px;
 }
