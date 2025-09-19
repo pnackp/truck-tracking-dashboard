@@ -1,6 +1,6 @@
 .container_t{
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +11,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: aliceblue;
+    background-color: #FFFFFF;
 }
 
 .t-bar{
@@ -47,12 +47,13 @@
     height: 50%;
     width: 50%;
     border: 1px solid #8d8d8d;
-    background-color: aliceblue;
+    background-color: #FFFFFF;
     border-radius: 38px;
     font-family: 'Roboto', sans-serif;
     font-size: 1rem;
     font-weight: 700;
     color: rgb(72, 78, 78); 
+    cursor: pointer;
 }
 
 .box-m{
@@ -64,7 +65,7 @@
 .box-m-l{
     height: 100%;
     width: 70%;
-    background-color: aliceblue;
+    background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
 }
@@ -101,6 +102,9 @@
     height: 90%;
     border: 1px solid #c6c6c6;
     border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .box-r{
@@ -145,4 +149,115 @@
     height: 90%;
     border: 1px solid #c6c6c6;
     border-radius: 16px;
+}
+
+.Logout{
+    cursor: pointer;
+}
+
+.create-c{
+    width: 20%;
+    height: 100%;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-box{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-box button{
+    width: 80%;
+    height: 80%;
+    border: 1px solid #8d8d8d;
+    background-color: #FFFFFF;
+    border-radius: 26px;
+    cursor: pointer;
+}
+
+.size-b {
+    width: 100%;
+    height: 100%;   
+    display: grid;
+    grid-template-columns: repeat(5 ,20%);
+    grid-template-rows: repeat(3 ,33.333%);
+    justify-content: flex-start;    
+    align-items: flex-start;
+}
+
+.box-click {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.in-box-c{
+    width: 85%;
+    height: 90%;
+
+    border: 1px solid #8d8d8d;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap:3px;    
+}
+
+.images{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.images img{
+    height: 100%;
+    aspect-ratio: 1/1;
+}
+
+.Title-t{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #585555;
+}
+
+.status{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #585555;
+}
+
+.token-gen{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #585555;
 }

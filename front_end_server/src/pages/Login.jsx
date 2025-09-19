@@ -1,29 +1,27 @@
 import "./Login.css"
 import { useState } from "react"
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-
-
-export function Login() {
+export function Login({ onLogin }) {
     const [user, setUsername] = useState("");
     const [pass, setPassword] = useState("");
     const onbutClick = async () => {
         try {
-            const response = await fetch("http://127.0.0.1:3000/login", {
+            const response = await fetch("http://127.0.0.1:3000/Login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username: user, password: pass })
             });
             const data = await response.json();
-            if (data.status) {
-                document.getElementsByClassName("container-lg")[0].style.display = "none";
+            if (data.token) {
                 localStorage.setItem("token", data.token);
+                onLogin(data.token);    
             }
         } catch (err) {
             console.error("Fetch failed:", err);
         }
     };
 
-    return (
+    return (        
         <div className="container-lg">
             <div className="container-lp">
                 <div className="lg-p">
@@ -33,10 +31,10 @@ export function Login() {
                             <div className="lg_title"><a>Login Account</a></div>
                             <div className="up">
                                 <div className="Username">
-                                    <input id="username" type="text" placeholder="Username" onChange={(e)=>{setUsername(e.target.value)}} />
+                                    <input id="username" type="text" placeholder="Username" onChange={(e) => { setUsername(e.target.value) }} />
                                 </div>
                                 <div className="Password">
-                                    <input id="password" type="password" placeholder="Password" onChange={(e)=>{setPassword(e.target.value)}}/>
+                                    <input id="password" type="password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
                                 </div>
                             </div>
                             <div className="Bott">
@@ -54,7 +52,7 @@ export function Login() {
             <div className="container-rp">
                 <div className="animate">
                     <DotLottieReact
-                        src="https://lottie.host/82d081f4-c03a-4637-b0ab-9b2f36707041/TyQaI9Kr6X.lottie"
+                        src="https://lottie.host/be258ad2-a8da-4d03-bd80-cc136809de13/bnk9J3zn4H.lottie"
                         loop
                         autoplay
                     />
