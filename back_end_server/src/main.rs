@@ -1,10 +1,12 @@
 use axum::{ // for Call get , post
-    http::{header,Method}, routing::{get, post}, Router,Json
-};
+    http::{header,Method}, routing::post, Router,Json
+}; // http is protocal to save {head is type of body you want to tell ex body is json and header
+// need to tell server my body is json} Method is Type or what do you want ex POST get ,
+// routing::post is function you want to call from method
 use serde::{Serialize,Deserialize}; // Convert struct , json
-use tower_http::cors::{CorsLayer, Any}; // Middleware
+use tower_http::cors::{CorsLayer, Any}; // Middleware //CorsLayer is set layer before go in server 
 
-use jsonwebtoken::{encode, EncodingKey, Header}; // JWT for encypt to 16b
+use jsonwebtoken::{encode, EncodingKey, Header}; // JWT for encypt to 16b 
 use chrono::{Utc, Duration}; // Timer
 
 #[derive(Deserialize)]
@@ -20,7 +22,7 @@ struct Back{
 #[derive(Serialize)]
 struct Enc {
     us: String,
-    dr: usize, // หรือ DateTime<Utc>
+    dr: usize, 
 }
 
 async fn login(payload : Json<Up>)-> Json<Back>{
@@ -42,17 +44,18 @@ async fn login(payload : Json<Up>)-> Json<Back>{
 
         Json(Back {token : Some(tokenkey)})
     } else {
-        // ถ้า login ผิด
+        
         Json(Back {token:None})
     }
 }
 
-#[tokio::main]
+#[tokio::main] // tokio is libary to used async tokio:main would tell complier this function == fn
+// main 
 async fn main(){
-    let app = Router::new().route("/Login" , post(login)).route("/api_test", get(|| async {"Hello"}));
+    let app = Router::new().route("/Login" , post(login)); 
     let cors = CorsLayer::new()
         .allow_origin(Any)
-        .allow_methods([Method::GET, Method::POST])
+        .allow_methods([Method::POST])
         .allow_headers([header::CONTENT_TYPE]);
     let app = app.layer(cors);
     let listener = tokio::net::TcpListener::bind("127.0.0.1:3000").await.unwrap();

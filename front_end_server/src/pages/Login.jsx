@@ -1,27 +1,35 @@
 import "./Login.css"
 import { useState } from "react"
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-export function Login({ onLogin }) {
-    const [user, setUsername] = useState("");
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'; // import animation
+import { Insert_token } from "./component/manage_token/mn_token";
+
+export function Login({ onLogin }) { // app sent "function" to parmeter login
+    const [user, setUsername] = useState(""); // create user state // you can set user by call fuction setUsername
     const [pass, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+
     const onbutClick = async () => {
+        if (user == "" || pass == "") return;
+        setLoading(true);
         try {
-            const response = await fetch("http://127.0.0.1:3000/Login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username: user, password: pass })
+            const response = await fetch("http://127.0.0.1:3000/Login", { // fire to this ip and wait for respond
+                method: "POST", // SET post is mean you send somethings and you need somethings back
+                headers: { "Content-Type": "application/json" }, //Tell receiver this file is json
+                body: JSON.stringify({ username: user, password: pass }) //insert value in object
             });
-            const data = await response.json();
-            if (data.token) {
-                localStorage.setItem("token", data.token);
-                onLogin(data.token);    
+            const data = await response.json(); // take what receiver send back
+            if (data.token) { // if have token 
+                Insert_token("token", data.token); // Set token in local for next no need to login
+                onLogin(data.token);    // call function Onlogin for change page to dashboard
             }
         } catch (err) {
-            console.error("Fetch failed:", err);
+            console.error("Fetch failed:", err); // if cant connect to ip
+        }
+        finally {
+            setLoading(false);
         }
     };
-
-    return (        
+    return (
         <div className="container-lg">
             <div className="container-lp">
                 <div className="lg-p">
@@ -39,7 +47,7 @@ export function Login({ onLogin }) {
                             </div>
                             <div className="Bott">
                                 <div className="bott-box">
-                                    <button onClick={onbutClick}></button>
+                                    <button onClick={onbutClick} disabled={loading}></button>
                                 </div>
                             </div>
                         </div>
