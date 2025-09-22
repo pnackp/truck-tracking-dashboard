@@ -132,7 +132,7 @@
     align-items: center;
 }
 
-.add-but , .button-dele , .button-detail{
+.add-but , .button-dele , .button-detail , .canc-b , .cre-b{
     aspect-ratio: 3/1;
     height:60%;
     background-color: rgb(253, 253, 253);
@@ -243,14 +243,14 @@
     flex-direction: column;
 }
 
-.m-b-t , .m-b-p{
+.m-b-t , .m-b-p , .m-b-user , .m-b-pass , .m-b-client , .m-b-topic{
     height: 15%;
     width: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
 }
-.Server , .Port{
+.Server , .Port , .user , .pass , .client , .topic{
     width:20%;
     height: 100%;
     display: flex;
@@ -262,12 +262,13 @@
     color: rgb(255, 255, 255);
 }
 
-.input-server , .input-port{
+.input-server , .input-port , .input-user , .input-pass , .input-client , .input-topic{
     width: 80%;
     height: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
+    
 }
 
 .m-b input{
@@ -280,7 +281,7 @@
     font-weight: 700;
     background-color: #4A4A4A;
     transition: 0.2s;
-    border-radius: 8px;
+    border-bottom: 1px solid #8f8f8f;
     border: 0;
     padding-left: 5px;
     box-sizing: border-box;
@@ -295,4 +296,60 @@
 
 .input-port{
     width: 60%;
+}
+
+.c-f{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+}
+
+.create , .cancel{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.cre-b , .canc-b{
+    height: 70%;
+}
+
+.cre-b:hover , .canc-b:hover{
+    height: 80%;
+    font-size: 1.3rem;
+}
+
+.canc-b{
+    background-color: #FF3B30;
+    color: #ffffff;
+}
+
+.cre-b{
+    background-color: #4A4A4A;
+    color: #ffffff;
+}
+
+.st-box{
+    width: 80%;
+    height: 80%;
+    border-radius: 16px;
+}
+
+.input-pro{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.client-p{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border: 0;
+    background-color: #424040;
 }
