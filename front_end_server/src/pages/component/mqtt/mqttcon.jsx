@@ -10,7 +10,7 @@ export function useMqtt(boxes) {
     boxes.forEach((box) => {
       if (clientsRef.current[box.clientId]) return;
 
-      const client = mqtt.connect(`${box.pro}${box.server}:${box.port}`, {
+      const client = mqtt.connect(`${box.pro}${box.server}`, {
         username: box.user,
         password: box.pass,
         clientId: box.clientId,

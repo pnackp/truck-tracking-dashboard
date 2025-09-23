@@ -4,7 +4,7 @@ import { Check_token, Remove_token } from "./component/manage_token/mn_token";
 import { useMqtt } from "./component/mqtt/mqttcon";
 
 export function Truck({ onLogout, changepage}) {
-    const initialForm = { server: "", port: "", user: "", pass: "", topic: "", pro: "ws://" };
+    const initialForm = { server: "",user: "", pass: "", topic: "", pro: "ws://" };
     const [formData, setFormData] = useState(initialForm);
 
     const [boxes, setBoxes] = useState(() => {
@@ -24,8 +24,8 @@ export function Truck({ onLogout, changepage}) {
 
     const Addbox = () => {
         if (!Check_token("token_login")) { onLogout(null); }
-        if (!formData.server || !formData.port || !formData.topic) {
-            alert("Server, Port, and Topic are required!");
+        if (!formData.server || !formData.topic) {
+            alert("Server and Topic are required!");
             Setcreate(false);
             return;
         }
@@ -116,12 +116,6 @@ export function Truck({ onLogout, changepage}) {
                             <div className="Server"><a>Server</a></div>
                             <div className="input-server">
                                 <input type="text" name="server" placeholder="Enter your broker" value={formData.server} onChange={handleChange} />
-                            </div>
-                        </div>
-                        <div className="m-b-p">
-                            <div className="Port"><a>Port</a></div>
-                            <div className="input-port">
-                                <input type="text" name="port" placeholder="Enter your port" value={formData.port} onChange={handleChange} />
                             </div>
                         </div>
                         <div className="m-b-user">
