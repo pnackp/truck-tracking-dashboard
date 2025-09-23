@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Check_token, Remove_token } from "./component/manage_token/mn_token";
 import { useMqtt } from "./component/mqtt/mqttcon";
 
-export function Truck({ onLogout }) {
+export function Truck({ onLogout, changepage}) {
     const initialForm = { server: "", port: "", user: "", pass: "", topic: "", pro: "ws://" };
     const [formData, setFormData] = useState(initialForm);
 
@@ -11,10 +11,11 @@ export function Truck({ onLogout }) {
         const saved = localStorage.getItem("boxes");
         return saved ? JSON.parse(saved) : [];
     });
-    
+
     const [isCreate, Setcreate] = useState(false);
     const { statuses, messages } = useMqtt(boxes);
     useEffect(() => { localStorage.setItem("boxes", JSON.stringify(boxes)); }, [boxes]);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,6 +50,7 @@ export function Truck({ onLogout }) {
         setBoxes(newBoxes);
         Remove_token(boxes[index]);
     };
+
 
     return (
         <div className="main-tr">
@@ -98,7 +100,7 @@ export function Truck({ onLogout }) {
                                         <div className="button-r">
                                             <div className="button-dele" onClick={() => {Deletebox(index)} }><a>Delete</a></div>
                                         </div>
-                                        <div className="button-l"><div className="button-detail"><a>Detail</a></div></div>
+                                        <div className="button-l"><div className="button-detail" onClick={()=>{changepage(true)}}><a>Detail</a></div></div>
                                     </div>
                                 </div>
                             </div>

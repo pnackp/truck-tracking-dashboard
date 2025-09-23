@@ -1,5 +1,5 @@
 import "./Login.css"
-import { useState } from "react"
+import { use, useEffect, useState } from "react"
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'; // import animation
 import { Insert_token } from "./component/manage_token/mn_token";
 
@@ -7,7 +7,6 @@ export function Login({ onLogin }) { // app sent "function" to parmeter login
     const [user, setUsername] = useState(""); // create user state // you can set user by call fuction setUsername
     const [pass, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
-
     const onbutClick = async () => {
         if (user == "" || pass == "") return;
         setLoading(true);
