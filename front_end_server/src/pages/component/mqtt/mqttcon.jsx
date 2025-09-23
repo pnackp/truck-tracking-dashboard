@@ -14,7 +14,6 @@ export function useMqtt(boxes) {
         username: box.user,
         password: box.pass,
         clientId: box.clientId,
-        reconnectPeriod: 2000, 
       });
 
       client.on("connect", () => {
