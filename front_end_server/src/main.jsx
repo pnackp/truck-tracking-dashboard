@@ -10,5 +10,3 @@ createRoot(document.getElementById('root')).render(
     </div>
   </StrictMode>,
 )
-
-// เรียกฟังชั่น app ก่อนเพื่อเช็ค token

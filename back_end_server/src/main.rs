@@ -9,6 +9,8 @@ use tower_http::cors::{CorsLayer, Any}; // Middleware //CorsLayer is set layer b
 use jsonwebtoken::{encode, EncodingKey, Header}; // JWT for encypt to 16b 
 use chrono::{Utc, Duration}; // Timer
 
+use jsonwebtoken::{decode, DecodingKey, Validation, Algorithm};
+
 #[derive(Deserialize)]
 struct Up{
     username: String,
@@ -19,10 +21,15 @@ struct Back{
     token: Option<String>,
 }
 
-#[derive(Serialize)]
+
+#[derive(Serialize,Deserialize)]
 struct Enc {
     us: String,
     dr: usize, 
+}
+#[derive(Serialize)]
+struct Sta{
+    status  : bool,
 }
 
 async fn login(payload : Json<Up>)-> Json<Back>{
@@ -49,10 +56,34 @@ async fn login(payload : Json<Up>)-> Json<Back>{
     }
 }
 
+async fn checklogin(payload: Json<Back>) -> Json<Sta> {
+    if let Some(token) = &payload.token {
+        let secret = "testest_Mqtt";
+        let validation = Validation::new(Algorithm::HS256);
+
+        let token_data = decode::<Enc>(
+            token,
+            &DecodingKey::from_secret(secret.as_bytes()),
+            &validation
+        );
+
+        match token_data {
+            Ok(data) => {
+                let now = Utc::now().timestamp() as usize;
+                let valid = data.claims.dr > now;
+                Json(Sta { status: valid })
+            },
+            Err(_) => Json(Sta { status: false }),
+        }
+    } else {
+        Json(Sta { status: false })
+    }
+}
+
 #[tokio::main] // tokio is libary to used async tokio:main would tell complier this function == fn
 // main 
 async fn main(){
-    let app = Router::new().route("/Login" , post(login)); 
+    let app = Router::new().route("/Login" , post(login)).route("/CheckLogin", post(checklogin)); 
     let cors = CorsLayer::new()
         .allow_origin(Any)
         .allow_methods([Method::POST])

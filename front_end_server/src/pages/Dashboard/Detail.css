@@ -1,0 +1,114 @@
+.container_de{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-de{
+    width: 100%;
+    height: 100%;
+    background-color:rgb(255, 255, 255);
+    display: flex;
+    flex-direction: column;
+}
+.top-de{
+    width: 100%;
+    height: 15%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: rgb(44, 44, 44);
+    display: flex;
+    align-items: center;
+}
+
+.topl-de{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 100%;
+}
+
+.topr-de{
+    margin-left: auto;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.mid-de{
+    width: 100%;
+    height: 100%;
+    background-color: #e6e6e6;
+}
+
+.Add-widget{
+    aspect-ratio: 3/1;
+    height: 50%;
+    background-color: #fdfdfd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: 0.2s;
+    color : rgb(5, 108, 177);
+    border: 1px solid rgb(5, 108, 177);
+}
+
+.Add-widget:hover{
+    color : rgb(255, 255, 255);
+    background-color: rgb(5, 108, 177);
+    cursor: pointer;
+}
+
+.main-widget{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+}
+
+.Select-de {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+}
+
+.Select-de > div{
+    width: 33%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-map , .box-value , .box-graph{
+    width: 90%;
+    height: 40%;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: 0.2s;
+    color : rgb(5, 108, 177);
+    border: 1px solid rgb(5, 108, 177);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-map:hover , .box-value:hover , .box-graph:hover{
+    color : rgb(255, 255, 255);
+    background-color: rgb(5, 108, 177);
+    cursor: pointer;
+}
