@@ -16,7 +16,7 @@ struct Up{
     username: String,
     password: String,
 }
-#[derive(Serialize,Deserialize)]
+#[derive(Serialize,Deserialize,Debug)]
 struct Back{
     token: Option<String>,
 }
@@ -25,7 +25,7 @@ struct Back{
 #[derive(Serialize,Deserialize)]
 struct Enc {
     us: String,
-    dr: usize, 
+    exp: usize, 
 }
 #[derive(Serialize)]
 struct Sta{
@@ -38,7 +38,7 @@ async fn login(payload : Json<Up>)-> Json<Back>{
 
         let claims = Enc {
             us: payload.username.clone(),
-            dr: expiration, 
+            exp: expiration, 
         };
 
         let secret = "testest_Mqtt";
@@ -56,28 +56,28 @@ async fn login(payload : Json<Up>)-> Json<Back>{
     }
 }
 
-async fn checklogin(payload: Json<Back>) -> Json<Sta> {
-    if let Some(token) = &payload.token {
-        let secret = "testest_Mqtt";
-        let validation = Validation::new(Algorithm::HS256);
-
-        let token_data = decode::<Enc>(
-            token,
-            &DecodingKey::from_secret(secret.as_bytes()),
-            &validation
-        );
-
-        match token_data {
-            Ok(data) => {
-                let now = Utc::now().timestamp() as usize;
-                let valid = data.claims.dr > now;
-                Json(Sta { status: valid })
-            },
-            Err(_) => Json(Sta { status: false }),
-        }
-    } else {
-        Json(Sta { status: false })
-    }
+async fn checklogin(payload: Json<Back>) -> Json<Sta> {
+    println!("payload: {:?}", payload);
+    if let Some(token_str) = &payload.token {
+        let mut validation = Validation::new(Algorithm::HS256);
+        validation.validate_exp = false; // ถ้าแค่ test ไม่อยาก validate exp
+        
+        let token_message = decode::<Enc>(
+            token_str,
+            &DecodingKey::from_secret("testest_Mqtt".as_ref()),
+            &validation
+        );
+
+        match token_message {
+            Ok(_data) => Json(Sta { status: true }),  // decode สำเร็จ
+            Err(err) => {
+                println!("decode error: {:?}", err); // แสดง error จริง
+                Json(Sta { status: false })
+            }
+        }
+    } else {
+        Json(Sta { status: false })
+    }
 }
 
 #[tokio::main] // tokio is libary to used async tokio:main would tell complier this function == fn

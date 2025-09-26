@@ -12,7 +12,6 @@ export function Truck({ onLogout }) {
     const handleAddbox = async () => {
         const token = localStorage.getItem("login_token");
         const Callback = await api_json("http://127.0.0.1:3000/CheckLogin","POST", JSON.stringify({ token }));
-        console.log(Callback);
         if (Callback && Callback.status) {
             SetContainer((prev) => [
                 ...prev,
