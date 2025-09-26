@@ -4,33 +4,54 @@ import plus from "../../assets/plus.png"
 import bin from "../../assets/bin.png"
 import { api_json } from "../component/api/auth";
 
-export function Truck({ onLogout }) {
+export function Truck({ onLogout, Onchangepage }) {
     const [Container, SetContainer] = useState(() => {
-        return localStorage.getItem("Container") ? JSON.parse(localStorage.getItem("Container")) : [];
+        const stored = localStorage.getItem("Container");
+        if (stored) {
+            try {
+                const parsed = JSON.parse(stored);
+                return Array.isArray(parsed) ? parsed : [];
+            } catch (e) {
+                return [];
+            }
+        }
+        return [];
     });
+    useEffect(() => {
+        const updateContainer = async () => {
+            try {
+                const token = localStorage.getItem("login_token");
+                if (!token) return;
+                const Callback = await api_json(
+                    "http://127.0.0.1:3000/updateContainer",
+                    "POST",
+
+                    JSON.stringify({
+                        token,
+                        container: JSON.stringify(Container),
+                    })
+                );
+                if (!Callback || !Callback.status) {
+                    console.log("Send back to login");
+                    onLogout(null);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        localStorage.setItem("Container", JSON.stringify(Container));
+        updateContainer();
+    }, [Container])
 
     const handleAddbox = async () => {
-        const token = localStorage.getItem("login_token");
-        const Callback = await api_json("http://127.0.0.1:3000/CheckLogin","POST", JSON.stringify({ token }));
-        if (Callback && Callback.status) {
-            SetContainer((prev) => [
-                ...prev,
-                {
-                    title: Math.random().toString(16).substr(2, 8),
-                    times: new Date(),
-                }
-            ]);
-        } else {
-            console.log("Send back to login");
-            onLogout(null);
-        }
+        SetContainer((prev) => [
+            ...prev,
+            {
+                title: Math.random().toString(16).substr(2, 8),
+                times: new Date(),
+            }
+        ]);
     };
-
-
-    useEffect(() => {
-        localStorage.setItem("Container", JSON.stringify(Container));
-    }, [Container]);
-
     const Deletebox = (index) => {
         const newContainer = Container.filter((_, i) => i !== index);
         SetContainer(newContainer);
@@ -66,7 +87,7 @@ export function Truck({ onLogout }) {
                     </div>
                     <div className="mid-box">
                         {Container.map((value, index) => (
-                            <div key={index} id={value.title} className="bx-con">
+                            <div key={index} id={value.title} className="bx-con" onClick={(e) => { Onchangepage(e.target.id) }}>
                                 <div className="title-bx"><a>{value.title}</a></div>
                                 <div className="info-bx"><a>{new Date(value.times).toLocaleString()}</a></div>
                                 <div className="delete">
