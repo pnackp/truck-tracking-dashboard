@@ -66,4 +66,241 @@
     grid-template-rows: repeat(6, 1fr);
     gap: 0px;
 }
-    
+
+
+.midbar-Dashboard {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 0px;
+}
+
+.div1,.div2,.div3,.div6{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.div1 {
+    grid-column: span 2;
+    grid-row: span 3;
+}
+
+.div2 {
+    grid-column: span 4 / span 4;
+    grid-row: span 4 / span 4;
+    grid-column-start: 1;
+    grid-row-start: 4;
+}
+
+.div3 {
+    grid-column: span 3 / span 3;
+    grid-row: span 7 / span 7;
+    grid-column-start: 5;
+    grid-row-start: 1;
+}
+
+.div6 {
+    grid-column: span 2;
+    grid-row: span 3;
+}
+
+
+.Connect ,.Subcrib{
+    width: 95%;
+    height: 90%;
+    background-color: #ffffff;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.connect-box{
+    width: 95%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    color: #1d1b1b;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.top-con{
+    width: 100%;
+    height: 10%;
+}
+
+.info-con{
+    width: 100%;
+    height: 90%;
+}
+
+.Server{
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem;
+    gap: 10px;
+}
+.Server input{
+    height: 30%;
+    transition: 0.2s;
+}
+
+.Server input:hover{
+    padding-left: 5px;
+}
+
+.Up{
+    display: flex;
+    height: 30%;
+    width: 100%;
+    justify-content: left;
+    font-size: 1rem;
+    gap: 10px;
+    align-items: center;
+}
+
+.username , .password{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1rem;
+    height: 100%;
+    width: 50%;
+    gap: 10px;
+}
+
+.username input, .password input{
+    height: 30%;
+    transition: 0.2s;
+}
+
+.username input:hover , .password input:hover{
+    padding-left: 5px;
+}
+
+.buttonAnPro{
+    width: 100%;
+    height: 35%;
+    display: flex;
+}
+
+.ConnectButton{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.button-CorD{
+    width: 50%;
+    height: 50%;
+    border: 1px solid #2877cc;
+    color: #ffffff;
+    background-color: #2877cc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    transition: 0.4s;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+
+.button-CorD:hover{
+    color:#2877cc;
+    background-color: #ffffff;
+}
+
+.button-connected{
+    width: 50%;
+    height: 50%;
+    border: 1px solid #fa1616;
+    color: #f82f2f;
+    background-color: #fcfcfc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    transition: 0.4s;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.button-connected:hover{
+    background-color: #fa1616;
+    color: white;
+}
+
+.statusMqtt{
+    margin-left: auto;
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.state-disConnect{
+    width: 70%;
+    height: 40%;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    transition: 0.4s;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #ee4b4b;
+    color: #181818;
+    background-color: #eea3a3;
+}
+
+.state-Connect{
+    width: 70%;
+    height: 40%;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: 600;
+    transition: 0.4s;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #67f131;
+    color: #ffffff;
+    background-color: #67da45;
+}
+
+
+.midbar-con2{
+    width: 97%;
+    height: 90%;
+    background-color: #ffffff;
+    border: 1px solid black;
+}
+
+.map{
+    width: 90%;
+    height: 95%;
+    background-color: #ffffff;
+    border: 1px solid black;
+}
+
+

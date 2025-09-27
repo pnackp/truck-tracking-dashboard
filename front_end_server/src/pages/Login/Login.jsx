@@ -3,7 +3,7 @@ import { useState } from "react"
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { api_json } from "../component/api/auth";
 
-export function Login({ onEvent }) {
+export function Login({ onEvent , setContainer }) {
     const [username, SetUsername] = useState("");
     const [password, SetPassword] = useState("");
 
@@ -14,12 +14,14 @@ export function Login({ onEvent }) {
         }
         try {
             const Result = await api_json("http://127.0.0.1:3000/Login", "POST", JSON.stringify({ username, password }));
+            console.log(Result);
             if (Result && Result.token) {
                 console.log("login Success");
                 console.log(Result);
                 onEvent(Result.token);
                 if (Result.container_box) {
                     localStorage.setItem("Container", JSON.stringify(Result.container_box));
+                    setContainer(Result.container_box);
                 }
 
             } else {
