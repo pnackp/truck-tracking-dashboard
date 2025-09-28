@@ -3,37 +3,30 @@ import { Login } from "./pages/Login/Login.jsx";
 import { Truck } from "./pages/Truck/Struck.jsx";
 import { Dashboard } from "./pages/Dashboard/Detail.jsx";
 import { api_json } from "./pages/component/api/auth.jsx";
+import { usePersistentState } from "./pages/component/hook/state.jsx";
+
 
 export default function App() {
-    const [token, setToken] = useState(localStorage.getItem("login_token"));
-    const [onInfo, setInfo] = useState(() => {
-        const saved = localStorage.getItem("Pages");
-        return saved ? saved : null;
-    })
+    
+    const [token, setToken] = usePersistentState("login_token",null);
 
-    const [Container, SetContainer] = useState(() => {
-            return [];
-        });
+    const [onInfo, setInfo] = usePersistentState("Pages",null);
+
+    const [Container, SetContainer] = useState(null);
 
     const handleLoginSuccess = (newToken) => {
-        localStorage.setItem("login_token", newToken);
-        setToken(newToken);
+        localStorage.setItem("login_token", newToken);setToken(newToken);
     };
 
     useEffect(() => {
         const updateContainer = async () => {
             try {
-                const token = localStorage.getItem("login_token");
                 if (!token) return;
-                const Callback = await api_json(
-                    "http://127.0.0.1:3000/updateContainer",
-                    "POST",
-
+                const Callback = await api_json("http://127.0.0.1:3000/updateContainer","POST",
                     JSON.stringify({
                         token,
                         container: JSON.stringify(Container),
-                    })
-                );
+                    }));
                 if (!Callback || !Callback.status) {
                     console.log("Send back to login");
                     handleLogout();
@@ -47,8 +40,6 @@ export default function App() {
     }, [Container])
 
     const handleLogout = async () => {
-        const token = localStorage.getItem("login_token");
-
         try {
             const Callback = await api_json("http://127.0.0.1:3000/Logout", "POST", JSON.stringify({ token }));
             if (Callback.status === true) {
@@ -67,7 +58,6 @@ export default function App() {
     };
 
     const Changepage = async (key) => {
-        const token = localStorage.getItem("login_token");
         const Callback = await api_json("http://127.0.0.1:3000/CheckLogin", "POST", JSON.stringify({ token }));
         if (Callback && Callback.status) {
             console.log("Changing Page");
@@ -89,7 +79,7 @@ export default function App() {
             {!token ? (
                 <Login setContainer={SetContainer} onEvent={handleLoginSuccess} />
             ) : (
-                !onInfo ? (<Truck onLogout={handleLogout}  Onchangepage={Changepage} container={Container} setContainer={SetContainer}/>) : (<Dashboard backEvent={Changeback} container={Container} setContainer={SetContainer} />)
+                !onInfo ? (<Truck onLogout={handleLogout}  Onchangepage={Changepage} container={Container} setContainer={SetContainer}/>) : (<Dashboard title={onInfo} backEvent={Changeback} container={Container} setContainer={SetContainer} />)
             )}
         </div>
     );

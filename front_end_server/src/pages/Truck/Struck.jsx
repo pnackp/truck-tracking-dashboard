@@ -1,33 +1,25 @@
 import "./Struck.css"
-import { useState, useEffect } from "react";
 import plus from "../../assets/plus.png"
 import bin from "../../assets/bin.png"
-import { api_json } from "../component/api/auth";
 
 export function Truck({ onLogout, Onchangepage, setContainer, container }) {
     const handleAddbox = () => {
-        setContainer(prev => {
-            const updated = [
-                ...prev,
-                {
-                    title: Math.random().toString(16).substr(2, 8),
-                    times: new Date(),
-                    server: "",
-                    username: "",
-                    password: "",
-                }
-            ];
-            localStorage.setItem("Container", JSON.stringify(updated));
-            return updated;
-        });
+        setContainer(prev => [
+            ...prev,
+            {
+                title: Math.random().toString(16).substr(2, 8),
+                times: new Date(),
+                server: "",
+                username: "",
+                password: "",
+                qos: "0",
+                topic: "",
+            }
+        ]);
     };
 
     const Deletebox = (index) => {
-        setContainer(prev => {
-            const updated = prev.filter((_, i) => i !== index);
-            localStorage.setItem("Container", JSON.stringify(updated));
-            return updated;
-        });
+        setContainer(prev => prev.filter((_, i) => i !== index));
     };
 
     return (
@@ -64,7 +56,7 @@ export function Truck({ onLogout, Onchangepage, setContainer, container }) {
                                 <div className="info-bx"><a>{new Date(value.times).toLocaleString()}</a></div>
                                 <div className="delete">
                                     <div className="Delete-but">
-                                        <img src={bin} onClick={() => { Deletebox(index) }}></img>
+                                        <img src={bin} onClick={() => Deletebox(index)} />
                                     </div>
                                 </div>
                             </div>

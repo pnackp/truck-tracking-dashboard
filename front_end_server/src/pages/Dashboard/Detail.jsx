@@ -1,55 +1,105 @@
 import "./Detail.css"
-import { use, useEffect, useState } from "react"
+import {useEffect, useState } from "react"
 import { useMqttConnect } from "../component/mqtt/mqtt";
+import 'leaflet/dist/leaflet.css';
+import { MyMap } from "../component/map/map";
 
-export function Dashboard({ backEvent, container, setContainer }) {
-    const pages = localStorage.getItem("Pages");
-    const currentItem = container.find(item => item.title === pages) || {};
-    const [serverInput, setServerInput] = useState(currentItem.server || "");
-    const [usernameInput, setUsernameInput] = useState(currentItem.username || "");
-    const [passwordInput, setPasswordInput] = useState(currentItem.password || "");
 
-    const { mqttConnect, connectStatus, payload , mqttDisconnect } = useMqttConnect();
+export function Dashboard({ title, backEvent, container, setContainer }) {
+    const [onclickConnect, setClickConnect] = useState(false);
 
-    const [onConnect, Setconnect] = useState(false);
+    const currentItem = container.find(item => item.title === title) || {}; // Function Find item in json
+
+    const [serverInput, SetServerInput] = useState(currentItem.server || "");
+    const [userInput, SetUserInput] = useState(currentItem.username || "");
+    const [passInput, SetPasswordInput] = useState(currentItem.password || "");
+
+    const [topicInput, SetTopicInput] = useState(currentItem.topic || "");
+    const [qosInput, SetQosInput] = useState(0);
+
+    const [onClickSub, SetSub] = useState(false);
+
+    const [payload, setPayload] = useState([]);
+
+    const { mqttConnect, connectStatus, mqttDisconnect, mqttSub, mqttUnSub } = useMqttConnect({ setPayload });
 
     useEffect(() => {
-        if (onConnect) {
-            if (serverInput != "") {
-                setContainer(prev => prev.map(item => {
-                    if (item.title === pages) {
+        if (!topicInput || connectStatus !== "Connected") return;
+        console.log(qosInput);
+        if (onClickSub) {
+            setContainer(prev =>
+                prev.map(item => {
+                    if (item.title === title) {
                         return {
                             ...item,
-                            server: serverInput,
-                            username: usernameInput,
-                            password: passwordInput
+                            topic: topicInput,
+                            qos: qosInput,
                         };
                     }
                     return item;
-                }));
-                mqttConnect(serverInput, {
-                    username: usernameInput,
-                    password: passwordInput,
-                    clientId: "myClient_" + Math.random().toString(16).substr(2, 8),
-                    clean: true,
-                    connectTimeout: 4000,
                 })
-            } else {
-                console.log("Blank server ip");
-            }
-        }else{
+            )
+            console.log(topicInput, qosInput);
+            mqttSub(topicInput, qosInput);
+        } else {
+            mqttUnSub(topicInput);
+        }
+    }, [onClickSub])
+
+
+    useEffect(() => {
+        if (onclickConnect) {
+            setContainer(prev =>
+                prev.map(item => {
+                    if (item.title === title) {
+                        return {
+                            ...item,
+                            server: serverInput,
+                            username: userInput,
+                            password: passInput,
+                        };
+                    }
+                    return item;
+                })
+            )
+            mqttConnect(serverInput, {
+                username: userInput,
+                password: passInput,
+                clientId: "client_" + Math.random().toString(16).substr(2, 8),
+            });
+        } else {
             mqttDisconnect();
         }
-    }, [onConnect])
+    }, [onclickConnect])
+
+
+    const [lonInput, setLoninput] = useState(0);
+    const [latInput, setLatinput] = useState(0);
+
+    useEffect(() => {
+        if (payload.length > 0 && payload[0].message) {
+            try {
+                const msg = JSON.parse(payload[0].message); 
+                setLatinput(msg.lat);
+                setLoninput(msg.lon);
+            } catch (e) {
+                console.error("Invalid JSON in payload:", payload[0].message);
+            }
+        }
+    }, [payload]);
 
     return (
         <div className="container-Dashboard">
             <div className="topbar-Dashboard">
                 <div className="topbar-left-name">
-                    <a>{localStorage.getItem("Pages")}</a>
+                    <a>{title}</a>
                 </div>
                 <div className="topbar-right-button">
-                    <div className="goBackbutton" onClick={()=>{Setconnect(false);backEvent()}}>
+                    <div className="goBackbutton" onClick={()=>{
+                        if(!onclickConnect && !onClickSub){
+                            backEvent();
+                        }
+                    }}>
                         <a>Back</a>
                     </div>
                 </div>
@@ -64,30 +114,28 @@ export function Dashboard({ backEvent, container, setContainer }) {
                             <div className="info-con">
                                 <div className="Server">
                                     <label htmlFor="Server-in">Server input</label>
-                                    <input onChange={(e) => { setServerInput(e.target.value) }} key="server" value={serverInput} className="Server-in" type="text" id="server" placeholder="Sever ip and Port" />
+                                    <input key="server" value={serverInput} className="Server-in" placeholder="Sever ip and Port" onChange={(e) => { SetServerInput(e.target.value) }} />
                                 </div>
                                 <div className="Up">
                                     <div className="username">
                                         <label htmlFor="username-in">Username</label>
-                                        <input key="username" onChange={(e) => { setUsernameInput(e.target.value) }} value={usernameInput} className="username-in" type="text" id="username" placeholder="Enter Username to connect" />
+                                        <input value={userInput} key="username" className="username-in" type="text" placeholder="Enter Username to connect" onChange={(e) => { SetUserInput(e.target.value) }} />
                                     </div>
                                     <div className="password">
                                         <label htmlFor="password-in">Password</label>
-                                        <input key="password" value={passwordInput} onChange={(e) => { setPasswordInput(e.target.value) }} className="password-in" type="password" id="password" placeholder="Enter Password to connect" />
+                                        <input value={passInput} className="password-in" type="password" placeholder="Enter Password to connect" onChange={(e) => { SetPasswordInput(e.target.value) }} />
                                     </div>
                                 </div>
                                 <div className="buttonAnPro">
                                     <div className="ConnectButton">
-                                        <div
-                                            className={onConnect ? 'button-connected' : 'button-CorD'}
-                                            onClick={() => {
-                                                if (!serverInput) {
-                                                    Setconnect(false); 
-                                                } else {
-                                                    Setconnect(!onConnect);
-                                                }
-                                            }}>
-                                            {!onConnect? "Connect" : "Disconnect"}
+                                        <div className={onclickConnect ? "button-connected" : "button-CorD"} onClick={() => {
+                                            if (serverInput) {
+                                                setClickConnect(!onclickConnect);
+                                            } else {
+                                                setClickConnect(false);
+                                            }
+                                        }}>
+                                            <a>{onclickConnect ? "Disconnect" : "Connect"}</a>
                                         </div>
                                     </div>
                                     <div className="statusMqtt">
@@ -102,17 +150,60 @@ export function Dashboard({ backEvent, container, setContainer }) {
                 </div>
                 <div className="div2">
                     <div className="midbar-con2">
-
+                        <div className="message">
+                            <div className="top-mes">
+                                <a>Message</a>
+                            </div>
+                            <div className="mes-his">
+                                {payload.map((value, index) => (
+                                    <div key={index} className="container-box-message">
+                                        <div className="box-message">
+                                            <a>Message {index + 1} : {value.topic} : {value.message}</a>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="div3">
                     <div className="map">
-
+                        <MyMap lat={latInput} lon={lonInput} />
                     </div>
                 </div>
+
                 <div className="div6">
                     <div className="Subcrib">
-
+                        <div className="Sub-box">
+                            <div className=""> <a>Subscriber</a></div>
+                            <div className="info-con">
+                                <div className="Topic">
+                                    <label htmlFor="Topic-in">Topic input</label>
+                                    <input value={topicInput} onChange={(e) => { SetTopicInput(e.target.value) }} className="Topic-in" type="text" id="topic" placeholder="Enter your topic" />
+                                </div>
+                                <div className="Qos">
+                                    <label htmlFor="qos">Qos</label>
+                                    <select value={qosInput} onChange={(e) => SetQosInput(Number(e.target.value))}>
+                                        <option value={0}>0</option>
+                                        <option value={1}>1</option>
+                                        <option value={2}>2</option>
+                                    </select>
+                                </div>
+                                <div className="button-subcrib">
+                                    <div className="subcribButton">
+                                        <div className={!onClickSub ? "subcrib-CorD" : "subcrib-connected"} onClick={() => {
+                                            if (connectStatus === "Connected" && topicInput != "") {
+                                                SetSub(!onClickSub);
+                                            } else {
+                                                SetSub(false);
+                                            }
+                                        }}>
+                                            <a>{onClickSub ? "Unsubscrib" : "Subscrib"}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

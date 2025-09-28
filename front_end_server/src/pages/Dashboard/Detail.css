@@ -137,7 +137,7 @@
     height: 90%;
 }
 
-.Server{
+.Server , .Topic , .Qos{
     display: flex;
     flex-direction: column;
     height: 30%;
@@ -146,12 +146,20 @@
     font-size: 1rem;
     gap: 10px;
 }
-.Server input{
+.Server input , .Topic input{
     height: 30%;
     transition: 0.2s;
 }
 
-.Server input:hover{
+.Qos select{
+    width: 20%;
+    height: 30%;
+    background-color: #ffffff;
+    border: 1px solid rgb(119, 119, 119);
+
+}
+
+.Server input:hover , .Topic input:hover{
     padding-left: 5px;
 }
 
@@ -190,7 +198,7 @@
     display: flex;
 }
 
-.ConnectButton{
+.ConnectButton , .subcribButton{
     width: 50%;
     height: 100%;
     display: flex;
@@ -198,7 +206,7 @@
     justify-content: left;
 }
 
-.button-CorD{
+.button-CorD , .subcrib-CorD{
     width: 50%;
     height: 50%;
     border: 1px solid #2877cc;
@@ -216,12 +224,12 @@
 }
 
 
-.button-CorD:hover{
+.button-CorD:hover , .subcrib-CorD:hover{
     color:#2877cc;
     background-color: #ffffff;
 }
 
-.button-connected{
+.button-connected , .subcrib-connected{
     width: 50%;
     height: 50%;
     border: 1px solid #fa1616;
@@ -238,7 +246,7 @@
     font-size: 1rem;
 }
 
-.button-connected:hover{
+.button-connected:hover ,  .subcrib-connected:hover{
     background-color: #fa1616;
     color: white;
 }
@@ -294,6 +302,9 @@
     height: 90%;
     background-color: #ffffff;
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .map{
@@ -303,4 +314,71 @@
     border: 1px solid black;
 }
 
+.Sub-box{
+    width: 95%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    color: #1d1b1b;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
 
+.button-subcrib{
+    width: 100%;
+    height: 35%;
+    display: flex;
+    align-items: center;
+}
+
+.message{
+    width: 98%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+}
+
+.top-mes{
+    height: 10%;
+    width: 100%;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.mes-his{
+    width: 100%;
+    height: 90%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+.container-box-message{
+    width: 100%;
+    flex: 0 0 10%;
+    border-bottom: 1px solid rgb(201, 201, 201);
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+    transition: 0.4s;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.box-message{
+    width: 95%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}

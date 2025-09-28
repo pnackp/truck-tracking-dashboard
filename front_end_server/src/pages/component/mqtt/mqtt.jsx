@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import mqtt from "mqtt";
 
-export function useMqttConnect() {
+export function useMqttConnect({setPayload}) {
     const [client, setClient] = useState(null);
     const [connectStatus, setConnectStatus] = useState('Disconnected');
-    const [payload, setPayload] = useState(null);
+    const [isSub, setIsSub] = useState(null);
 
     const mqttConnect = (host, mqttOption) => {
         setConnectStatus('Connecting');
@@ -19,6 +19,35 @@ export function useMqttConnect() {
         }
     };
 
+    const mqttSub = (topic, qos) => {
+        if (!client || connectStatus !== "Connected") {
+            console.log("Cannot subscribe, not connected yet");
+            return;
+        }
+
+        client.subscribe(topic, { qos }, (error) => {
+            if (error) {
+                console.log('Subscribe to topics error', error);
+                return;
+            }
+            setIsSub(true);
+            console.log("Subscribed to", topic);
+        });
+    };
+
+
+    const mqttUnSub = (topic) => {
+        if (client) {
+            client.unsubscribe(topic, error => {
+                if (error) {
+                    console.log('Unsubscribe error', error);
+                    return;
+                }
+                setIsSub(false);
+            });
+        }
+    };
+
     useEffect(() => {
         if (!client) return;
 
@@ -26,7 +55,7 @@ export function useMqttConnect() {
         client.on('reconnect', () => setConnectStatus('Reconnecting'));
         client.on('error', (err) => { console.error(err); client.end(); setConnectStatus('Error'); });
         client.on('message', (topic, message) => {
-            setPayload({ topic, message: message.toString() });
+            setPayload(prev => [{ topic, message: message.toString() }, ...prev]);
         });
 
         return () => {
@@ -34,6 +63,6 @@ export function useMqttConnect() {
         };
     }, [client]);
 
-    return { mqttConnect, connectStatus, payload, mqttDisconnect };
+    return { mqttConnect, connectStatus, mqttDisconnect, mqttSub, mqttUnSub };
 }
 
