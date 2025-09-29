@@ -15,7 +15,7 @@ export function Login({ onEvent, setContainer }) {
                 onEvent(token);
                 if (container_box) {
                     setContainer(container_box);
-                }else{
+                } else {
                     setContainer([]);
                 }
             } else console.log("Login failed");
@@ -23,6 +23,8 @@ export function Login({ onEvent, setContainer }) {
             console.error(err);
         }
     };
+
+
 
     return (
         <div className="container-lg">

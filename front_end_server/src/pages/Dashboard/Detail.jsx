@@ -1,5 +1,5 @@
 import "./Detail.css"
-import {useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useMqttConnect } from "../component/mqtt/mqtt";
 import 'leaflet/dist/leaflet.css';
 import { MyMap } from "../component/map/map";
@@ -8,7 +8,7 @@ import { MyMap } from "../component/map/map";
 export function Dashboard({ title, backEvent, container, setContainer }) {
     const [onclickConnect, setClickConnect] = useState(false);
 
-    const currentItem = container.find(item => item.title === title) || {}; // Function Find item in json
+    const currentItem = container?.find(item => item.title === title) || {};
 
     const [serverInput, SetServerInput] = useState(currentItem.server || "");
     const [userInput, SetUserInput] = useState(currentItem.username || "");
@@ -22,6 +22,7 @@ export function Dashboard({ title, backEvent, container, setContainer }) {
     const [payload, setPayload] = useState([]);
 
     const { mqttConnect, connectStatus, mqttDisconnect, mqttSub, mqttUnSub } = useMqttConnect({ setPayload });
+
 
     useEffect(() => {
         if (!topicInput || connectStatus !== "Connected") return;
@@ -79,7 +80,7 @@ export function Dashboard({ title, backEvent, container, setContainer }) {
     useEffect(() => {
         if (payload.length > 0 && payload[0].message) {
             try {
-                const msg = JSON.parse(payload[0].message); 
+                const msg = JSON.parse(payload[0].message);
                 setLatinput(msg.lat);
                 setLoninput(msg.lon);
             } catch (e) {
@@ -95,8 +96,8 @@ export function Dashboard({ title, backEvent, container, setContainer }) {
                     <a>{title}</a>
                 </div>
                 <div className="topbar-right-button">
-                    <div className="goBackbutton" onClick={()=>{
-                        if(!onclickConnect && !onClickSub){
+                    <div className="goBackbutton" onClick={() => {
+                        if (!onclickConnect && !onClickSub) {
                             backEvent();
                         }
                     }}>

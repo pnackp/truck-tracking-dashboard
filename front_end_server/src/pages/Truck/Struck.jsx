@@ -1,7 +1,7 @@
 import "./Struck.css"
 import plus from "../../assets/plus.png"
 import bin from "../../assets/bin.png"
-
+import { useEffect } from "react";
 export function Truck({ onLogout, Onchangepage, setContainer, container }) {
     const handleAddbox = () => {
         setContainer(prev => [
@@ -21,6 +21,17 @@ export function Truck({ onLogout, Onchangepage, setContainer, container }) {
     const Deletebox = (index) => {
         setContainer(prev => prev.filter((_, i) => i !== index));
     };
+
+    useEffect(() => {
+        const savedContainer = localStorage.getItem("Container");
+        if (savedContainer) {
+            try {
+                setContainer(JSON.parse(savedContainer));
+            } catch {
+                setContainer([]);
+            }
+        }
+    }, []);
 
     return (
         <div className="container-2nd">
@@ -50,8 +61,13 @@ export function Truck({ onLogout, Onchangepage, setContainer, container }) {
                         </div>
                     </div>
                     <div className="mid-box">
-                        {container.map((value, index) => (
-                            <div key={index} id={value.title} className="bx-con" onClick={(e) => { Onchangepage(e.target.id) }}>
+                        {container && container.map((value, index) => (
+                            <div
+                                key={index}
+                                id={value.title}
+                                className="bx-con"
+                                onClick={(e) => Onchangepage(e.target.id)}
+                            >
                                 <div className="title-bx"><a>{value.title}</a></div>
                                 <div className="info-bx"><a>{new Date(value.times).toLocaleString()}</a></div>
                                 <div className="delete">

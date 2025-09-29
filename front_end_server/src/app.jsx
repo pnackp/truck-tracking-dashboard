@@ -1,4 +1,4 @@
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Login } from "./pages/Login/Login.jsx";
 import { Truck } from "./pages/Truck/Struck.jsx";
 import { Dashboard } from "./pages/Dashboard/Detail.jsx";
@@ -7,22 +7,22 @@ import { usePersistentState } from "./pages/component/hook/state.jsx";
 
 
 export default function App() {
-    
-    const [token, setToken] = usePersistentState("login_token",null);
 
-    const [onInfo, setInfo] = usePersistentState("Pages",null);
+    const [token, setToken] = usePersistentState("login_token", null);
+
+    const [onInfo, setInfo] = usePersistentState("Pages", null);
 
     const [Container, SetContainer] = useState(null);
 
     const handleLoginSuccess = (newToken) => {
-        localStorage.setItem("login_token", newToken);setToken(newToken);
+        localStorage.setItem("login_token", newToken); setToken(newToken);
     };
 
     useEffect(() => {
         const updateContainer = async () => {
             try {
                 if (!token) return;
-                const Callback = await api_json("http://127.0.0.1:3000/updateContainer","POST",
+                const Callback = await api_json("http://127.0.0.1:3000/updateContainer", "POST",
                     JSON.stringify({
                         token,
                         container: JSON.stringify(Container),
@@ -35,9 +35,12 @@ export default function App() {
                 console.error(err);
             }
         };
-        localStorage.setItem("Container", JSON.stringify(Container));
+
+        if (Container) {
+            localStorage.setItem("Container", JSON.stringify(Container));
+        }
         updateContainer();
-    }, [Container])
+    }, [Container]);
 
     const handleLogout = async () => {
         try {
@@ -79,7 +82,7 @@ export default function App() {
             {!token ? (
                 <Login setContainer={SetContainer} onEvent={handleLoginSuccess} />
             ) : (
-                !onInfo ? (<Truck onLogout={handleLogout}  Onchangepage={Changepage} container={Container} setContainer={SetContainer}/>) : (<Dashboard title={onInfo} backEvent={Changeback} container={Container} setContainer={SetContainer} />)
+                !onInfo ? (<Truck onLogout={handleLogout} Onchangepage={Changepage} container={Container} setContainer={SetContainer} />) : (<Dashboard title={onInfo} backEvent={Changeback} container={Container} setContainer={SetContainer} />)
             )}
         </div>
     );
