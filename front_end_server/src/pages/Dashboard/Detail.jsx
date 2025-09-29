@@ -8,13 +8,10 @@ import { MyMap } from "../component/map/map";
 export function Dashboard({ title, backEvent, container, setContainer }) {
     const [onclickConnect, setClickConnect] = useState(false);
 
-    const currentItem = container?.find(item => item.title === title) || {};
-
-    const [serverInput, SetServerInput] = useState(currentItem.server || "");
-    const [userInput, SetUserInput] = useState(currentItem.username || "");
-    const [passInput, SetPasswordInput] = useState(currentItem.password || "");
-
-    const [topicInput, SetTopicInput] = useState(currentItem.topic || "");
+    const [serverInput, SetServerInput] = useState("");
+    const [userInput, SetUserInput] = useState("");
+    const [passInput, SetPasswordInput] = useState("");
+    const [topicInput, SetTopicInput] = useState("");
     const [qosInput, SetQosInput] = useState(0);
 
     const [onClickSub, SetSub] = useState(false);
@@ -23,6 +20,27 @@ export function Dashboard({ title, backEvent, container, setContainer }) {
 
     const { mqttConnect, connectStatus, mqttDisconnect, mqttSub, mqttUnSub } = useMqttConnect({ setPayload });
 
+    useEffect(() => {
+        const savedContainer = localStorage.getItem("Container");
+        if (savedContainer) {
+            try {
+                setContainer(JSON.parse(savedContainer));
+            } catch {
+                setContainer([]);
+            }
+        }
+    }, []);
+
+    useEffect(() => {
+        const currentItem = container?.find(item => item.title === title);
+        if (currentItem) {
+            SetServerInput(currentItem.server || "");
+            SetUserInput(currentItem.username || "");
+            SetPasswordInput(currentItem.password || "");
+            SetTopicInput(currentItem.topic || "");
+            SetQosInput(currentItem.qos || 0);
+        }
+    }, [container, title]);
 
     useEffect(() => {
         if (!topicInput || connectStatus !== "Connected") return;
@@ -210,4 +228,4 @@ export function Dashboard({ title, backEvent, container, setContainer }) {
             </div>
         </div>
     )
-}
+} 

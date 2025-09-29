@@ -33,6 +33,7 @@ export function Truck({ onLogout, Onchangepage, setContainer, container }) {
         }
     }, []);
 
+
     return (
         <div className="container-2nd">
             <div className="topbar-2nd">
