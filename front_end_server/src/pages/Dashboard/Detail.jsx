@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useMqttConnect } from "../component/mqtt/mqtt";
 import 'leaflet/dist/leaflet.css';
 import { MyMap } from "../component/map/map";
-
+//
 
 export function Dashboard({ title, backEvent, container, setContainer }) {
     const [onclickConnect, setClickConnect] = useState(false);
