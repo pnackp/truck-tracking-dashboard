@@ -99,8 +99,9 @@ export function Dashboard({ title, backEvent, container, setContainer }) {
         if (payload.length > 0 && payload[0].message) {
             try {
                 const msg = JSON.parse(payload[0].message);
-                setLatinput(msg.lat);
-                setLoninput(msg.lon);
+                console.log(msg);
+                setLatinput(msg.latitude);
+                setLoninput(msg.longitude);
             } catch (e) {
                 console.error("Invalid JSON in payload:", payload[0].message);
             }

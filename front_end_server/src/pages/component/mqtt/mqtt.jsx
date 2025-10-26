@@ -53,7 +53,7 @@ export function useMqttConnect({setPayload}) {
 
         client.on('connect', () => { setConnectStatus('Connected'); console.log("connected") });
         client.on('reconnect', () => setConnectStatus('Reconnecting'));
-        client.on('error', (err) => { console.error(err); client.end(); setConnectStatus('Error'); });
+        client.on('error', (err) => { console.error(err); setConnectStatus('Error'); });
         client.on('message', (topic, message) => {
             setPayload(prev => [{ topic, message: message.toString() }, ...prev]);
         });
